@@ -1,6 +1,6 @@
 {
     "name": "deemru/blake2b",
-    "description": "BLAKE2 hash for PHP",
+    "description": "BLAKE2 hash function on pure PHP",
     "keywords": [ "wavesplatform", "blake2", "blake2b", "blake2b256", "hash" ],
     "homepage": "https://github.com/deemru/Blake2b",
     "type": "library",
