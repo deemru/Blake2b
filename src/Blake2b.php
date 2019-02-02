@@ -59,8 +59,6 @@ class Blake2b
 
     private function add64( $x, $y )
     {
-        static $n = 0;
-
         $l = ( $x[1] + $y[1] ) & 0xffffffff;
 
         if( PHP_INT_SIZE > 4 )
