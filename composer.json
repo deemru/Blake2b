@@ -1,0 +1,25 @@
+{
+    "name": "deemru/blake2b",
+    "description": "BLAKE2 hash for PHP",
+    "keywords": [ "wavesplatform", "blake2", "blake2b", "blake2b256", "hash" ],
+    "homepage": "https://github.com/deemru/Blake2b",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dmitrii Pichulin",
+            "email": "deem@deem.ru"
+        }
+    ],
+    "require": {
+        "php": ">=5.6"
+    }
+    "autoload": {
+        "psr-4": { "deemru\\": "src/" }
+    },
+    "scripts": {
+        "test": [
+            "@php test/selftest.php"
+        ]
+    }
+}
