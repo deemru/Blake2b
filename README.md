@@ -18,7 +18,7 @@ if( $hash !== hex2bin( 'b5da441cfe72ae042ef4d2b17742907f675de4da57462d4c3609c2e2
 
 ## Requirements
 
-- [PHP](http://php.net) >= 5.6
+- [PHP](http://php.net) >= 5.4
 
 ## Installation
 
