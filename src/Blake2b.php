@@ -39,7 +39,7 @@ class Blake2b
      */
     public function hash( $data )
     {
-        $ctx = $this->init( null, 32 );
+        $ctx = $this->init( null, $this->size );
         $this->update( $ctx, $data, strlen( $data ) );
         return substr( $this->finish( $ctx ), 0, $this->size );
     }
