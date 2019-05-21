@@ -157,10 +157,10 @@ class Blake2b
         $ctx[3] = []; // buf
         $ctx[4] = 0;  // buflen
 
-        for( $i = 8; $i--; )
+        for( $i = 8; --$i; )
             $ctx[0][$i] = $this->iv[$i];
 
-        for( $i = 256; $i--; )
+        for( $i = 256; --$i; )
             $ctx[3][$i] = 0;
 
         $zero = $this->new64( 0, 0 );
@@ -189,10 +189,10 @@ class Blake2b
         $m = [];
         $v = [];
 
-        for( $i = 16; $i--; )
+        for( $i = 16; --$i; )
             $m[$i] = $this->load64( $buf, $i * 8 );
 
-        for( $i = 8; $i--; )
+        for( $i = 8; --$i; )
             $v[$i] = $ctx[0][$i];
 
         $v[ 8] = $this->iv[0];
@@ -217,7 +217,7 @@ class Blake2b
             $this->G( $v, $m, $r, 7,  3,  4,  9, 14 );
         }
 
-        for( $i = 8; $i--; )
+        for( $i = 8; --$i; )
             $ctx[0][$i] = $this->xor64( $ctx[0][$i], $this->xor64( $v[$i], $v[$i + 8] ) );
     }
 
@@ -240,7 +240,7 @@ class Blake2b
 
             if( $plen > $fill )
             {
-                for( $i = $fill; $i--; )
+                for( $i = $fill; --$i; )
                     $ctx[3][$i + $left] = ord( $p[$i + $offset] );
 
                 $ctx[4] += $fill;
@@ -248,7 +248,7 @@ class Blake2b
                 $this->increment_counter( $ctx, 128 );
                 $this->compress( $ctx, $ctx[3] );
 
-                for( $i = 128; $i--; )
+                for( $i = 128; --$i; )
                     $ctx[3][$i] = $ctx[3][$i + 128];
 
                 $ctx[4] -= 128;
@@ -257,7 +257,7 @@ class Blake2b
             }
             else
             {
-                for( $i = $plen; $i--; )
+                for( $i = $plen; --$i; )
                     $ctx[3][$i + $left] = ord( $p[$i + $offset] );
 
                 $ctx[4] += $plen;
@@ -274,20 +274,20 @@ class Blake2b
             $this->increment_counter( $ctx, 128 );
             $this->compress( $ctx, $ctx[3] );
             $ctx[4] -= 128;
-            for( $i = $ctx[4]; $i--; )
+            for( $i = $ctx[4]; --$i; )
                 $ctx[3][$i] = $ctx[3][$i + 128];
         }
 
         $this->increment_counter( $ctx, $ctx[4] );
         $ctx[2][0] = $this->new64( 0xffffffff, 0xffffffff );
 
-        for( $i = 256 - $ctx[4]; $i--; )
+        for( $i = 256 - $ctx[4]; --$i; )
             $ctx[3][$i + $ctx[4]] = 0;
 
         $this->compress( $ctx, $ctx[3] );
 
         $out = '';
-        for( $i = 8; $i--; )
+        for( $i = 8; --$i; )
         {
             $out .= pack( 'N', $ctx[0][$i][0] );
             $out .= pack( 'N', $ctx[0][$i][1] );
@@ -305,7 +305,7 @@ class Blake2b
         $ctx = $this->context();
 
         $p = [];
-        for( $i = 64; $i--; )
+        for( $i = 64; --$i; )
             $p[$i] = 0;
 
         $p[0] = $outlen; // digest_length
@@ -318,8 +318,8 @@ class Blake2b
         if( $klen > 0 )
         {
             $block = [];
-            for( $i = 128; $i--; ) $block[$i] = 0;
-            for( $i = $klen; $i--; ) $block[$i] = $key[$i];
+            for( $i = 128; --$i; ) $block[$i] = 0;
+            for( $i = $klen; --$i; ) $block[$i] = $key[$i];
             $this->update( $ctx, $block, 128 );
         }
 
